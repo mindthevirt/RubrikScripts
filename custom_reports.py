@@ -48,7 +48,7 @@ def verify_credentials(username, password, clusterip):
 
 
 def failure_report(clusterip, authheader):
-    print "Creating Failure Report - Last 7 Days"
+    print "Failure Report - Last 7 Days"
     create_payload = "{\"name\":\"Failure Report - Last 7 Days\",\"reportTemplate\":\"ProtectionTasksDetails\"}"
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
