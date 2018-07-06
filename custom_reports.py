@@ -60,7 +60,6 @@ def failure_report(clusterip, authheader):
     update_report = requests.patch('https://'+clusterip+'/api/internal/report/'+reportid, headers=authheader, data=report_payload, verify=False)
     if update_report.status_code != 200:
         print "Report could not be updated. %s" %update_report.content
-        sys.exit(1)
 
 
 def data_reduction(clusterip, authheader):
@@ -76,7 +75,6 @@ def data_reduction(clusterip, authheader):
     update_report = requests.patch('https://'+clusterip+'/api/internal/report/'+reportid, headers=authheader, data=report_payload, verify=False)
     if update_report.status_code != 200:
         print "Report could not be updated. %s" %update_report.content
-        sys.exit(1)
 
 
 def average_job_duration(clusterip, authheader):
@@ -92,7 +90,6 @@ def average_job_duration(clusterip, authheader):
     update_report = requests.patch('https://'+clusterip+'/api/internal/report/'+reportid, headers=authheader, data=report_payload, verify=False)
     if update_report.status_code != 200:
         print "Report could not be updated. %s" %update_report.content
-        sys.exit(1)
 
 
 def system_capacity(clusterip, authheader):
@@ -108,7 +105,6 @@ def system_capacity(clusterip, authheader):
     update_report = requests.patch('https://'+clusterip+'/api/internal/report/'+reportid, headers=authheader, data=report_payload, verify=False)
     if update_report.status_code != 200:
         print "Report could not be updated. %s" %update_report.content
-        sys.exit(1)
 
 
 def daily_backup_admin(clusterip, authheader):
@@ -124,7 +120,6 @@ def daily_backup_admin(clusterip, authheader):
     update_report = requests.patch('https://'+clusterip+'/api/internal/report/'+reportid, headers=authheader, data=report_payload, verify=False)
     if update_report.status_code != 200:
         print "Report could not be updated. %s" %update_report.content
-        sys.exit(1)
 
 
 def daily_dba(clusterip, authheader):
@@ -140,7 +135,6 @@ def daily_dba(clusterip, authheader):
     update_report = requests.patch('https://'+clusterip+'/api/internal/report/'+reportid, headers=authheader, data=report_payload, verify=False)
     if update_report.status_code != 200:
         print "Report could not be updated. %s" %update_report.content
-        sys.exit(1)
 
 
 if __name__ == '__main__':
