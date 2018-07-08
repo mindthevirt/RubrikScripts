@@ -33,7 +33,7 @@ def base(**kwargs):
     system_capacity(clusterip, authheader)
     daily_backup_admin(clusterip, authheader)
     daily_dba(clusterip, authheader)
-    print "Reports have been created"
+    print "Report creation has completed"
 
 
 def verify_credentials(username, password, clusterip):
@@ -53,7 +53,7 @@ def failure_report(clusterip, authheader):
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
         print "Report creation failed. %s" %create_report.content
-        sys.exit(1)
+        return
     returndata = json.loads(create_report.content)
     reportid = returndata['id'].replace(":", "%3A")
     report_payload = "{\"name\":\"Failure Report - Last 7 Days\",\"filters\":{\"dateConfig\":{\"period\":\"PastWeek\"},\"taskStatus\":[\"Failed\"]},\"chart0\":{\"id\":\"chart0\",\"name\":\"Failed Tasks by SLA Domain\",\"chartType\":\"Donut\",\"attribute\":\"SlaDomain\",\"measure\":\"FailedTaskCount\"},\"chart1\":{\"id\":\"chart1\",\"name\":\"Failed Tasks by Object Name\",\"chartType\":\"VerticalBar\",\"attribute\":\"ObjectName\",\"measure\":\"FailedTaskCount\"},\"table\":{\"columns\":[\"TaskStatus\",\"TaskType\",\"ObjectName\",\"ObjectType\",\"Location\",\"SlaDomain\",\"StartTime\",\"EndTime\",\"Duration\"]}}"
@@ -68,7 +68,7 @@ def data_reduction(clusterip, authheader):
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
         print "Report creation failed. %s" %create_report.content
-        sys.exit(1)
+        return
     returndata = json.loads(create_report.content)
     reportid = returndata['id'].replace(":", "%3A")
     report_payload = "{\"name\":\"Data Reduction Summary - Last 30 Days\",\"filters\":{\"dateConfig\":{\"period\":\"Past30Days\"}},\"chart0\":{\"id\":\"chart0\",\"name\":\"Data Reduction by Object Type\",\"chartType\":\"HorizontalBar\",\"attribute\":\"ObjectType\",\"measure\":\"LogicalDataReductionPercent\"},\"chart1\":{\"id\":\"chart1\",\"name\":\"Data Reduction by SLA Domain\",\"chartType\":\"VerticalBar\",\"attribute\":\"SlaDomain\",\"measure\":\"LogicalDataReductionPercent\"},\"table\":{\"columns\":[\"Day\",\"TaskType\",\"ObjectType\",\"SlaDomain\",\"DedupRatio\",\"LogicalDataReductionPercent\",\"DataReductionPercent\",\"LogicalDedupRatio\",\"SuccessfulTaskCount\",\"CanceledTaskCount\",\"FailedTaskCount\",\"AverageDuration\",\"DataTransferred\",\"DataStored\"]}}"
@@ -83,7 +83,7 @@ def average_job_duration(clusterip, authheader):
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
         print "Report creation failed. %s" %create_report.content
-        sys.exit(1)
+        return
     returndata = json.loads(create_report.content)
     reportid = returndata['id'].replace(":", "%3A")
     report_payload = "{\"name\":\"Average Job Durations - Last 7 Days\",\"filters\":{\"dateConfig\":{\"period\":\"PastWeek\"},\"taskStatus\":[\"Succeeded\"]},\"chart0\":{\"id\":\"chart0\",\"name\":\"Average Duration by Object Type\",\"chartType\":\"VerticalBar\",\"attribute\":\"ObjectType\",\"measure\":\"AverageDuration\"},\"chart1\":{\"id\":\"chart1\",\"name\":\"Daily Tasks by Object Type\",\"chartType\":\"HorizontalBar\",\"attribute\":\"ObjectType\",\"measure\":\"TaskCount\"},\"table\":{\"columns\":[\"TaskStatus\",\"TaskType\",\"ObjectName\",\"ObjectType\",\"Location\",\"SlaDomain\",\"StartTime\",\"EndTime\",\"Duration\",\"DataTransferred\",\"DataStored\"]}}"
@@ -98,7 +98,7 @@ def system_capacity(clusterip, authheader):
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
         print "Report creation failed. %s" %create_report.content
-        sys.exit(1)
+        return
     returndata = json.loads(create_report.content)
     reportid = returndata['id'].replace(":", "%3A")
     report_payload = "{\"name\":\"System Capacity by Object Type - Last 30 Days\",\"filters\":{\"dateConfig\":{\"period\":\"Past30Days\"}},\"chart0\":{\"id\":\"chart0\",\"name\":\"Total Data Stored by Object Type\",\"chartType\":\"Donut\",\"attribute\":\"ObjectType\",\"measure\":\"DataStored\"},\"chart1\":{\"id\":\"chart1\",\"name\":\"Data Transferred vs Stored by Object Type\",\"chartType\":\"StackedHorizontalBar\",\"attribute\":\"ObjectType\",\"measure\":\"StackedTotalData\"},\"table\":{\"columns\":[\"Day\",\"SlaDomain\",\"TaskType\",\"ObjectType\",\"Location\",\"SuccessfulTaskCount\",\"CanceledTaskCount\",\"FailedTaskCount\",\"DataTransferred\",\"DataStored\",\"LogicalDataProtected\"]}}"
@@ -113,7 +113,7 @@ def daily_backup_admin(clusterip, authheader):
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
         print "Report creation failed. %s" %create_report.content
-        sys.exit(1)
+        return
     returndata = json.loads(create_report.content)
     reportid = returndata['id'].replace(":", "%3A")
     report_payload = "{\"name\":\"Daily Backup Administrator Report\",\"filters\":{\"dateConfig\":{\"period\":\"PastDay\"}},\"chart0\":{\"id\":\"chart0\",\"name\":\"Daily Protection Tasks by Status\",\"chartType\":\"StackedHorizontalBar\",\"attribute\":\"TaskType\",\"measure\":\"StackedTaskCountByStatus\"},\"chart1\":{\"id\":\"chart1\",\"name\":\"Failed Tasks by Object Type\",\"chartType\":\"VerticalBar\",\"attribute\":\"ObjectName\",\"measure\":\"FailedTaskCount\"},\"table\":{\"columns\":[\"TaskStatus\",\"TaskType\",\"ObjectName\",\"StartTime\",\"EndTime\",\"SlaDomain\",\"ObjectType\",\"Location\",\"Duration\",\"DedupRatio\",\"LogicalDedupRatio\",\"DataStored\",\"DataTransferred\"]}}"
@@ -128,7 +128,7 @@ def daily_dba(clusterip, authheader):
     create_report = requests.post('https://'+clusterip+'/api/internal/report', headers=authheader, data=create_payload, verify=False)
     if create_report.status_code != 201:
         print "Report creation failed. %s" %create_report.content
-        sys.exit(1)
+        return
     returndata = json.loads(create_report.content)
     reportid = returndata['id'].replace(":", "%3A")
     report_payload = "{\"name\":\"Daily DBA Report\",\"filters\":{\"dateConfig\":{\"period\":\"PastDay\"},\"objectType\":[\"Mssql\"]},\"chart0\":{\"id\":\"chart0\",\"name\":\"Daily Protection Tasks by Status\",\"chartType\":\"StackedHorizontalBar\",\"attribute\":\"TaskType\",\"measure\":\"StackedTaskCountByStatus\"},\"chart1\":{\"id\":\"chart1\",\"name\":\"Failed Tasks by SQL Database\",\"chartType\":\"VerticalBar\",\"attribute\":\"ObjectName\",\"measure\":\"FailedTaskCount\"},\"table\":{\"columns\":[\"TaskStatus\",\"TaskType\",\"ObjectName\",\"ObjectType\",\"Location\",\"SlaDomain\",\"StartTime\",\"EndTime\",\"DataTransferred\",\"DataStored\",\"DedupRatio\",\"LogicalDedupRatio\",\"LogicalDataReductionPercent\"]}}"
