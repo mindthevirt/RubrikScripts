@@ -9,6 +9,7 @@ Below is a list of all custom scripts:
 
 #### custom_reports.py - Custom Reports for Rubrik CDM
 This script creates 6 custom reports for Rubrik CDM 4.0 and later.
+Syntax: `python custom_reports.py <rubrik-ip>`
 The following reports are included:
 - Weekly Failure Report
 - Monthly Data Reduction Summary
