@@ -1,13 +1,3 @@
-# RubrikScripts
-This repository holds custom scripts for Rubrik CDM.
-All scripts are supported on Rubrik CDM 4.0 and later.
-
-**_Note: This repo is not an official [Rubrik Inc.](https://github.com/rubrikinc) repo._**
-
-## List of scripts and use cases
-Below is a list of all custom scripts:
-
-#### custom_reports.py - Custom Reports for Rubrik CDM
 This script creates 6 custom reports for Rubrik CDM 4.0 and later.
 
 `python custom_reports.py <rubrik-ip>`
