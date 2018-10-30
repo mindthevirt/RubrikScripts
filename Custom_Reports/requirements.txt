@@ -2,7 +2,7 @@
 # https://github.com/damnever/pigar
 
 # custom_reports.py: 6
-requests == 2.19.1
+requests == 2.20.0
 
 # custom_reports.py: 11
 urllib3 == 1.23
