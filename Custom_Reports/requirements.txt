@@ -5,4 +5,4 @@
 requests == 2.20.0
 
 # custom_reports.py: 11
-urllib3 == 1.23
+urllib3 == 1.26.5
